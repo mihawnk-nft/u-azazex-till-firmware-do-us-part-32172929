@@ -28,6 +28,10 @@ def main() -> None:
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8", newline="") as f:
         f.write(text)
+    # Read-back verification: the file on disk must hold exactly the vow.
+    with open(OUTPUT_PATH, "r", encoding="utf-8", newline="") as f:
+        written = f.read()
+    assert written == text, "entry.txt on disk differs from the vow"
     print(f"wrote {len(text)} characters to {OUTPUT_PATH}")
 
 
